@@ -29,6 +29,7 @@ Aplicativo mobile multiplataforma para cadastro e gestão de **escolas** e suas 
 
 ```
 desafio-medgrupo-react/
+├── __tests__/                           # Tests folder
 ├── app/
 │   ├── _layout.tsx                      # Root layout + Providers
 │   ├── index.tsx                        # Redirect para /schools
@@ -140,6 +141,15 @@ O MirageJS é inicializado automaticamente em `app/_layout.tsx`. O banco começa
 | `POST`   | `/api/schools/:schoolId/classes`      | Cria turma na escola           |
 | `PATCH`  | `/api/classes/:id`                    | Atualiza turma                 |
 | `DELETE` | `/api/classes/:id`                    | Remove turma                   |
+
+---
+
+## Entidades
+
+| Entidade | Campos |
+|----------|--------|
+| **School** | `id`, `name`, `address`, `classesCount`, `createdAt` |
+| **Class** | `id`, `schoolId`, `name`, `shift` (`Manhã`/`Tarde`/`Noite`), `academicYear`, `createdAt` |
 
 ---
 
