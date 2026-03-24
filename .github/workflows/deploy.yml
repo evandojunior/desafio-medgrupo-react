@@ -1,0 +1,46 @@
+name: CI / CD - GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build_and_deploy:
+    name: Build & Deploy Expo Web
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout do Repositório
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: 📥 Instalar Dependências (Legacy Peer Deps)
+        run: npm ci --legacy-peer-deps
+
+      - name: 🧪 Executar Testes Unitários
+        run: npm test
+
+      - name: 🚀 Construir Aplicação Web
+        run: npx expo export 
+
+      - name: 🔧 Configurar Rotas do SPA (404.html)
+        run: cp dist/index.html dist/404.html
+
+      - name: 🌐 Fazer Deploy no GitHub Pages
+        if: github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true

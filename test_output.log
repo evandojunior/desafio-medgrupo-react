@@ -1,0 +1,241 @@
+FAIL __tests__/StoreCard.test.tsx
+  StoreCard
+    ✓ renders store name and address (277 ms)
+    ✕ renders product count badge (13 ms)
+    ✕ shows delete dialog when Excluir is pressed (4 ms)
+    ✕ calls onDelete when confirming deletion (4 ms)
+    ✕ renders "produto" singular when count is 1 (3 ms)
+
+  ● StoreCard › renders product count badge
+
+    Unable to find an element with text: 5 produtos
+
+    [36m<View[39m
+      [33maccessible[39m=[32m{true}[39m
+    [36m>[39m
+      [36m<View>[39m
+        [36m<View>[39m
+          [36m<Ionicons />[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<Text>[39m
+            [0mLoja Teste[0m
+          [36m</Text>[39m
+          [36m<View>[39m
+            [36m<Ionicons />[39m
+            [36m<Text>[39m
+              [0mRua Teste, 123[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<View>[39m
+            [36m<Text>[39m
+              [0m5[0m
+              [0m [0m
+              [0mprods.[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+          [36m<View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+      [36m</View>[39m
+    [36m</View>[39m
+
+      37 |       <StoreCard store={mockStore} onDelete={onDelete} />
+      38 |     );
+    > 39 |     expect(getByText('5 produtos')).toBeTruthy();
+         |            ^
+      40 |   });
+      41 |
+      42 |   it('shows delete dialog when Excluir is pressed', () => {
+
+      at Object.getByText (__tests__/StoreCard.test.tsx:39:12)
+
+  ● StoreCard › shows delete dialog when Excluir is pressed
+
+    Unable to find an element with text: Excluir
+
+    [36m<View[39m
+      [33maccessible[39m=[32m{true}[39m
+    [36m>[39m
+      [36m<View>[39m
+        [36m<View>[39m
+          [36m<Ionicons />[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<Text>[39m
+            [0mLoja Teste[0m
+          [36m</Text>[39m
+          [36m<View>[39m
+            [36m<Ionicons />[39m
+            [36m<Text>[39m
+              [0mRua Teste, 123[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<View>[39m
+            [36m<Text>[39m
+              [0m5[0m
+              [0m [0m
+              [0mprods.[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+          [36m<View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+      [36m</View>[39m
+    [36m</View>[39m
+
+      47 |
+      48 |     expect(queryByText('Excluir Loja')).toBeNull();
+    > 49 |     fireEvent.press(getByText('Excluir'));
+         |                     ^
+      50 |     expect(getByText('Excluir Loja')).toBeTruthy();
+      51 |   });
+      52 |
+
+      at Object.getByText (__tests__/StoreCard.test.tsx:49:21)
+
+  ● StoreCard › calls onDelete when confirming deletion
+
+    Unable to find an element with text: Excluir
+
+    [36m<View[39m
+      [33maccessible[39m=[32m{true}[39m
+    [36m>[39m
+      [36m<View>[39m
+        [36m<View>[39m
+          [36m<Ionicons />[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<Text>[39m
+            [0mLoja Teste[0m
+          [36m</Text>[39m
+          [36m<View>[39m
+            [36m<Ionicons />[39m
+            [36m<Text>[39m
+              [0mRua Teste, 123[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<View>[39m
+            [36m<Text>[39m
+              [0m5[0m
+              [0m [0m
+              [0mprods.[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+          [36m<View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+      [36m</View>[39m
+    [36m</View>[39m
+
+      57 |     );
+      58 |
+    > 59 |     fireEvent.press(getByText('Excluir'));
+         |                     ^
+      60 |     // There will be two "Excluir" buttons — the card one and the dialog confirm
+      61 |     const excluirButtons = getAllByText('Excluir');
+      62 |     fireEvent.press(excluirButtons[excluirButtons.length - 1]);
+
+      at Object.getByText (__tests__/StoreCard.test.tsx:59:21)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+
+  ● StoreCard › renders "produto" singular when count is 1
+
+    Unable to find an element with text: 1 produto
+
+    [36m<View[39m
+      [33maccessible[39m=[32m{true}[39m
+    [36m>[39m
+      [36m<View>[39m
+        [36m<View>[39m
+          [36m<Ionicons />[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<Text>[39m
+            [0mLoja Teste[0m
+          [36m</Text>[39m
+          [36m<View>[39m
+            [36m<Ionicons />[39m
+            [36m<Text>[39m
+              [0mRua Teste, 123[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+        [36m<View>[39m
+          [36m<View>[39m
+            [36m<Text>[39m
+              [0m1[0m
+              [0m [0m
+              [0mprod.[0m
+            [36m</Text>[39m
+          [36m</View>[39m
+          [36m<View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+            [36m<View[39m
+              [33maccessible[39m=[32m{true}[39m
+            [36m>[39m
+              [36m<Ionicons />[39m
+            [36m</View>[39m
+          [36m</View>[39m
+        [36m</View>[39m
+      [36m</View>[39m
+    [36m</View>[39m
+
+      73 |       <StoreCard store={singleProductStore} onDelete={onDelete} />
+      74 |     );
+    > 75 |     expect(getByText('1 produto')).toBeTruthy();
+         |            ^
+      76 |   });
+      77 | });
+      78 |
+
+      at Object.getByText (__tests__/StoreCard.test.tsx:75:12)
+
+Test Suites: 1 failed, 1 total
+Tests:       4 failed, 1 passed, 5 total
+Snapshots:   0 total
+Time:        0.952 s, estimated 1 s
+Ran all test suites matching /__tests__\/StoreCard.test.tsx/i.
