@@ -9,15 +9,6 @@ Aplicativo mobile multiplataforma para cadastro e gestão de **escolas** e suas 
 
 ---
 
-## Entidades
-
-| Entidade | Campos |
-|----------|--------|
-| **School** | `id`, `name`, `address`, `classesCount`, `createdAt` |
-| **Class** | `id`, `schoolId`, `name`, `shift` (`Manhã`/`Tarde`/`Noite`), `academicYear`, `createdAt` |
-
----
-
 ## Versões utilizadas
 
 | Ferramenta       | Versão           |
@@ -40,10 +31,14 @@ Aplicativo mobile multiplataforma para cadastro e gestão de **escolas** e suas 
 desafio-medgrupo-react/
 ├── app/
 │   ├── _layout.tsx                      # Root layout + Providers
+│   ├── index.tsx                        # Redirect para /schools
 │   ├── (tabs)/
-│   │   ├── index.tsx                    # Lista de Escolas (tab principal)
-│   │   └── about.tsx                    # Sobre
+│   │   ├── _layout.tsx                  # Layout das tabs
+│   │   ├── index.tsx                    # Tab: Lista de Escolas
+│   │   ├── classes.tsx                  # Tab: Lista de Turmas
+│   │   └── about.tsx                    # Tab: Sobre
 │   └── schools/
+│       ├── index.tsx                    # Lista de escolas
 │       ├── new.tsx                      # Formulário nova escola
 │       └── [id]/
 │           ├── index.tsx                # Detalhe da escola + turmas
@@ -52,27 +47,50 @@ desafio-medgrupo-react/
 │               ├── new.tsx              # Nova turma
 │               └── [classId]/
 │                   └── edit.tsx         # Editar turma
-├── src/
-│   ├── adapters/                        # Transformação de respostas da API
-│   │   ├── school.adapter.ts
-│   │   └── class.adapter.ts
-│   ├── components/
-│   │   ├── SchoolCard/                  # Card: nome, endereço, nº turmas
-│   │   ├── ClassCard/                   # Card: nome, turno (badge colorido), ano letivo
-│   │   ├── SearchBar/
-│   │   ├── EmptyState/
-│   │   └── ui/                          # Componentes base (Gluestack)
-│   ├── hooks/
-│   │   ├── useSchools.ts
-│   │   └── useClasses.ts
-│   ├── repositories/
-│   │   ├── SchoolRepository.ts
-│   │   └── ClassRepository.ts
-│   ├── services/
-│   │   └── mock/server.ts               # MirageJS — banco vazio, sem seeds
-│   ├── store/
-│   │   └── index.ts                     # Zustand: SchoolSlice + ClassSlice
-│   └── types/index.ts                   # School, Class, ClassShift, inputs
+└── src/
+    ├── adapters/                        # Transformação de respostas da API
+    │   ├── school.adapter.ts
+    │   └── class.adapter.ts
+    ├── components/
+    │   ├── SchoolCard/                  # Componente de Card da Escola
+    │   ├── ClassCard/                   # Componente de Card da Turma
+    │   ├── SearchBar/                   # Componente de Barra de Busca
+    │   ├── EmptyState/                  # Componente de Estado Vazio
+    │   └── ui/                          # Componentes base (Gluestack)
+    ├── features/                        # Módulos de UI por domínio
+    │   ├── About/
+    │   │   ├── index.tsx                # Tela Sobre
+    │   │   └── style.ts
+    │   ├── School/
+    │   │   ├── SchoolList/              # Listagem de escolas
+    │   │   ├── SchoolDetail/            # Detalhe da escola + turmas
+    │   │   ├── NewSchool/               # Formulário nova escola
+    │   │   └── EditSchool/              # Formulário editar escola
+    │   └── Class/
+    │       ├── ClassList/               # Listagem de turmas
+    │       ├── NewClass/                # Formulário nova turma
+    │       └── EditClass/               # Formulário editar turma
+    ├── hooks/
+    │   ├── useSchools.ts
+    │   ├── useClasses.ts
+    │   └── useToast.ts
+    ├── repositories/
+    │   ├── ISchoolRepository.ts         # Interface do repositório
+    │   ├── IClassRepository.ts          # Interface do repositório
+    │   ├── SchoolRepository.ts
+    │   └── ClassRepository.ts
+    ├── services/
+    │   ├── api.ts                       # Instância Axios configurada
+    │   └── mock/server.ts               # MirageJS mock server
+    ├── store/
+    │   └── index.ts                     # Zustand: SchoolSlice + ClassSlice
+    ├── styles/                          # Estilos compartilhados
+    │   ├── form.ts
+    ├── types/index.ts                   # School, Class, ClassShift, inputs
+    └── utils/                           # Funções utilitárias
+        ├── currency.ts
+        ├── navigation.ts
+        └── shadow.ts
 ```
 
 ---
@@ -137,6 +155,13 @@ O MirageJS é inicializado automaticamente em `app/_layout.tsx`. O banco começa
 - [x] Persistência de dados via AsyncStorage (MirageJS + Zustand)
 - [x] Arquitetura limpa: Repository → Adapter → Store → Hook → Screen
 - [x] TypeScript estritamente tipado em todos os contratos
+
+---
+
+## Funcionalidades Extra
+
+- Lista de Turmas de Todas as Escolas + Filtros avançados por Escola, Turno.
+- Página Sobre com informações do projeto e do desenvolvedor.
 
 ---
 
