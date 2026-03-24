@@ -9,14 +9,7 @@ Aplicativo mobile multiplataforma para cadastro e gestão de **escolas** e suas 
 
 ---
 
-## Entidades
 
-| Entidade | Campos |
-|----------|--------|
-| **School** | `id`, `name`, `address`, `classesCount`, `createdAt` |
-| **Class** | `id`, `schoolId`, `name`, `shift` (`Manhã`/`Tarde`/`Noite`), `academicYear`, `createdAt` |
-
----
 
 ## Versões utilizadas
 
@@ -38,6 +31,7 @@ Aplicativo mobile multiplataforma para cadastro e gestão de **escolas** e suas 
 
 ```
 desafio-medgrupo-react/
+├── __tests__/                           # Tests folder
 ├── app/
 │   ├── _layout.tsx                      # Root layout + Providers
 │   ├── (tabs)/
@@ -57,11 +51,11 @@ desafio-medgrupo-react/
 │   │   ├── school.adapter.ts
 │   │   └── class.adapter.ts
 │   ├── components/
-│   │   ├── SchoolCard/                  # Card: nome, endereço, nº turmas
-│   │   ├── ClassCard/                   # Card: nome, turno (badge colorido), ano letivo
-│   │   ├── SearchBar/
+│   │   ├── SchoolCard/                  # Card de Escolas
+│   │   ├── ClassCard/                   # Card de Turmas
+│   │   ├── SearchBar/                   # Barra de Pesquisa
 │   │   ├── EmptyState/
-│   │   └── ui/                          # Componentes base (Gluestack)
+│   │   └── ui/                          # Componentes UI (Gluestack)
 │   ├── hooks/
 │   │   ├── useSchools.ts
 │   │   └── useClasses.ts
@@ -69,7 +63,7 @@ desafio-medgrupo-react/
 │   │   ├── SchoolRepository.ts
 │   │   └── ClassRepository.ts
 │   ├── services/
-│   │   └── mock/server.ts               # MirageJS — banco vazio, sem seeds
+│   │   └── mock/server.ts               # MirageJS — mock da api
 │   ├── store/
 │   │   └── index.ts                     # Zustand: SchoolSlice + ClassSlice
 │   └── types/index.ts                   # School, Class, ClassShift, inputs
@@ -125,6 +119,15 @@ O MirageJS é inicializado automaticamente em `app/_layout.tsx`. O banco começa
 
 ---
 
+## Entidades
+
+| Entidade | Campos |
+|----------|--------|
+| **School** | `id`, `name`, `address`, `classesCount`, `createdAt` |
+| **Class** | `id`, `schoolId`, `name`, `shift` (`Manhã`/`Tarde`/`Noite`), `academicYear`, `createdAt` |
+
+---
+
 ## Funcionalidades implementadas
 
 - [x] CRUD completo de escolas (nome + endereço)
@@ -139,8 +142,6 @@ O MirageJS é inicializado automaticamente em `app/_layout.tsx`. O banco começa
 - [x] TypeScript estritamente tipado em todos os contratos
 
 ---
-
-## Decisões técnicas
 
 ### Repository + Adapter Pattern
 Cada entidade tem seu repositório (`SchoolRepository`, `ClassRepository`) responsável pelas chamadas HTTP, e seu adapter (`schoolAdapter`, `classAdapter`) para transformar respostas brutas em objetos de domínio tipados.
